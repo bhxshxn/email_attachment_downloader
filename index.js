@@ -11,6 +11,6 @@ app.get('/run', (req, res) => {
     res.send('runned')
 })
 
-app.listen(Port, () => {
+app.listen(port, () => {
     console.log('server running')
 })
