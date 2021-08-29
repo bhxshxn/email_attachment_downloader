@@ -17,7 +17,7 @@ function findAttachmentParts(struct, attachments) {
     return attachments
 }
 
-const downloadAttach = (email, pass, sender, date) => {
+const downloadAttach = (email, pass, sender, date, befaft) => {
     const imap = new Imap({
         user: email,
         password: pass,
@@ -32,7 +32,7 @@ const downloadAttach = (email, pass, sender, date) => {
         // A4 EXAMINE "INBOX"
         imap.openBox('INBOX', true, (err, box) => {
             if (err) throw err;
-            imap.search(['ALL', ['FROM', sender], ['SINCE', date]], (err, results) => {
+            imap.search(['ALL', ['FROM', sender], [befaft, date]], (err, results) => {
                 if (err) throw err;
                 const f = imap.seq.fetch(results, {
                     bodies: ['HEADER.FIELDS (SUBJECT)'],
